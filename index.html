@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jQuery.js"></script>
+    <title>The Babaniji Cousins Website</title>
+</head>
+
+<style>
+    body {
+        text-align: center;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.2)), url("images/babaniji_hangout_3.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+    }
+
+    div.input {
+        background-color: white;
+        padding: 2rem 5rem;
+        margin-top: 10rem;
+        background: linear-gradient(rgba(27, 16, 16, 0.568))
+    }
+
+    p.display {
+        font-size: 60pt;
+        margin-top: 8rem;
+    }
+
+    span {
+        color: rgb(78, 4, 78);
+    }
+
+    strong {
+        color: rgb(150, 23, 1);
+    }
+
+    @media (max-width: 1020px) {
+        body {
+            background-image: url("images/babaniji_hangout_4.png");
+        }
+        p.display {
+            margin-top: 6rem;
+        }
+    }
+
+    @media (max-width: 512px) {
+        p.display {
+            font-size: 40pt;
+            margin-top: 8rem;
+        } 
+
+        div.input p {
+            font-size: 9pt;
+        }
+
+        button {
+            font-size: 9pt;
+        }
+    }
+</style>
+
+<body>
+    <div class="input">
+        <p>Firstname <br> <input type="text" name="" id="first_name" placeholder="enter firstname"></p>
+        <P>Lastname <br> <input type="text" name="" id="last_name" placeholder="enter lastname"></P>
+        <p>Password <br> <input type="password" name="" id="pass_word" placeholder="enter password"> <br> 
+            (The password is the native name of the family's eldest cousin)
+        </p>
+        <button onclick="profile()">Log In </button>
+    </div>
+
+    <p class="display"></p> 
+</body>
+
+<Script>
+    function profile () {
+        //The array of males in the group.
+         const malenames = [
+            "ADEWALE", "ADESOPE", "OLUWASEYI", "IMOLEAYO", 
+            "ODUNAYO", "ERNEST", "EBENEZER",                                 
+            "ADEBOYE", 
+            "ADESOLA", "ADEKOYEJO",
+            "OLUWAFEMI", "ADEBAYO", "KEHINDE", "TAIWO"
+        ];
+            
+        //The array of females in the group.
+        const femalenames = [
+            "TITILOLA", 
+            "ELSIE", 
+            "TITILAYO", "OLATEJU", 
+            "ADERENLE", "OLUBUNMI", "TEMITOPE", "OLUWAFUMBI",
+            "ADELOLA",
+            "BOSEDE"
+        ]
+
+        const bastard = ["ADETOTO"];//Array for special bastards.
+
+        const surname  = ["BABANIJI", "FAMUTIMI", "OLATOYE", "TURTON", "ONOLAJA"];//Array for surnames.
+
+        const password =["ODUNAYO"];//password array
+
+        //Codes to collect inputs.
+        let firstName = $("#first_name").val();//This is jQwery syntax.
+        let lastName = document.querySelector("#last_name").value;//This is javaScript syntax.
+        let passWord = $("#pass_word").val();
+
+        //Codes to convert input to uppercase (optional), if the arrayed names are in uppercase.
+        firstName = firstName.toUpperCase();
+        lastName = lastName.toUpperCase();
+        passWord = passWord.toUpperCase();
+            
+        //Output messages after clicking buttons
+        let message1 = "Hello <br> Uncle <strong>" + firstName + " " + lastName + "</strong>, <br> <span>Keep Shining! </span>";
+        let message2 = "Hello <br> Aunty <strong>" + firstName + " " + lastName + "</strong>, <br> <span>Keep Shining! </span>";
+        let message3 = "Hello Dear, <br> <span>Enter  Firstname, Lastname <br> and Password.</span>";
+        let message4 = "Hello <br> Dear <strong>" + firstName + " " + lastName + "</strong>, <br> <span>Not a member?</span>";
+            
+        if (malenames.includes(firstName) && surname.includes(lastName) && password.includes(passWord)) {               //condition for male names.
+
+            document.querySelector("p.display").innerHTML = message1;   //This is javascript syntax.
+
+        } else if (femalenames.includes(firstName) && surname.includes(lastName) && password.includes(passWord)) {      //condition for female names.
+
+            $("p.display").html(message2);  //This is JQwery syntax.
+
+        } else if (bastard.includes(firstName) && surname.includes(lastName)) {             //condition for special bastards.
+                
+            $("p.display").html("Adetoro " + lastName + ", You are a <br> REAL BASTARD!!!");
+
+        } else if (firstName === "" || lastName === "" || passWord === "") {                //condition for empty input.
+
+            $("p.display").html(message3);  //This is JQwery syntax.
+
+        } else {                                                                            //condition for other inputs.
+
+            $("p.display").html(message4);  //This is JQwery syntax.
+
+        }
+
+        $("div.input").hide();
+
+            console.log("functioning")
+        }
+        
+        document.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                profile();
+            }
+        })
+    </Script>
+</html>
